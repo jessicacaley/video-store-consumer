@@ -3,6 +3,28 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = { 
+      movies: [],
+      customers: [],
+    };
+  }
+
+
+  componentDidMount = () => {
+    axios.get('http://localhost:3000/')
+    .then((response) => {
+      const movies = response.data.flatMap(movie => { return [{ ...movie }] });
+
+      this.setState({ movie: movie });
+    })
+    .catch((error) => {
+      this.setState({ errorMessage: error.message });
+    });
+  }
+  
   render() {
     return (
       <div className="App">

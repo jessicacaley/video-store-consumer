@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Customer = (props) => {
-  const { id, name } = props;
-  
+  const { id, name, getMovieCallback } = props;
+
   return (
     <section className="customer">
       <h3>{ name }</h3>
