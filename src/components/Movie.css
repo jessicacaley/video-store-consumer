@@ -1,6 +1,7 @@
 
 .movie-title {
   font-size: 20px;
+  padding-top: 20px;
 }
 
 .movie-info {
@@ -8,7 +9,15 @@
   padding: 0px 20px;
 }
 
-/*** this code is based on https://www.w3schools.com/howto/howto_css_flip_card.asp ***/
+.movie-button {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 20px;
+  bottom: 0;
+  border-radius: 100%;
+}
+
+/*** this code is a modified version of https://www.w3schools.com/howto/howto_css_flip_card.asp ***/
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .moviecard {
   background-color: transparent;
@@ -20,7 +29,7 @@
 }
 
 .moviecard.selected {
-  border: 5px solid lightgreen;
+  /* border: 5px solid lightgreen; */
 }
 
 .image {
@@ -39,7 +48,7 @@
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.moviecard:hover .moviecard__inner {
+.moviecard.selected .moviecard__inner { /* .moviecard:hover  */
   transform: rotateY(180deg);
 }
 
@@ -62,7 +71,7 @@
   background-color: black;
   color: white;
   transform: rotateY(180deg);
-  padding: 10px;
+  /* padding: 10px; */
   overflow: scroll;
 }
 /*** end code from https://www.w3schools.com/howto/howto_css_flip_card.asp ***/

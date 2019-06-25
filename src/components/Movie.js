@@ -25,7 +25,7 @@ class Movie extends Component {
           <div className="moviecard__back">
             <p className="movie-title">{ this.props.title } ({ this.props.release_date.substring(0,4) })</p>
             <p className="movie-info">{ this.props.overview }</p> 
-            <button>Add</button>
+            <button className="movie-button btn btn-secondary">+</button>
           </div>
         </div>
       </div>
