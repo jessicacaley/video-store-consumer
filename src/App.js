@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
+// import Movie from './components/Movie';
 
 class App extends Component {
   constructor() {
@@ -18,7 +20,7 @@ class App extends Component {
     .then((response) => {
       const movies = response.data.flatMap(movie => { return [{ ...movie }] });
 
-      this.setState({ movie: movie });
+      this.setState({ movies: movies });
     })
     .catch((error) => {
       this.setState({ errorMessage: error.message });
