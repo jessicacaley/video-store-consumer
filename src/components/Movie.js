@@ -1,30 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Movie.css';
 
-const Movie = (props) => {
-  const { id, external_id, title, overview, release_date, image_url } = props;
+class Movie extends Component {
+  constructor(props) {
+    super(props);
 
-  let cssShowOrHide = "movieShow";
-
-  const cssShow = () => {
-    cssShowOrHide = "movieShow";
+    this.state = { 
+      selected: false,
+    };
   }
 
-  const cssHide = () => {
-    cssShowOrHide = "movieHide";
+  clickMovie = () => {
+    this.setState({ selected: !this.state.selected })
   }
 
-  return (
-    <section className="movie">
-      <h3>{ title }</h3>
-      <h4>{ id }</h4>
-      <p>{ external_id }</p>
-      <p>{ overview }</p>
-      <p>{ release_date }</p>
-      <img onMouseEnter={ cssHide } onMouseLeave={ cssShow } className={ cssShowOrHide } src={ image_url } />
-    </section>
-  );
+  render() {
+    return (
+      <div onClick={ this.clickMovie } className={`moviecard ${this.state.selected ? "selected" : "not-selected"}`}>
+        <div className="moviecard__inner">
+          <div className="moviecard__front">
+            <img className="image" src={ this.props.image_url } alt="Movie"/>
+          </div>
+          <div className="moviecard__back">
+            <p className="movie-title">{ this.props.title } ({ this.props.release_date.substring(0,4) })</p>
+            <p className="movie-info">{ this.props.overview }</p> 
+            <button>Add</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
 Movie.propTypes = {
