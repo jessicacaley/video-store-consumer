@@ -7,35 +7,70 @@ class Movie extends Component {
     super(props);
 
     this.state = { 
-      selected: false,
+      flipped: false,
+      inLibrary: (this.props.existingMovieIds.includes(this.props.external_id)) ? true : false,
     };
   }
 
   clickMovie = () => {
-    this.setState({ selected: !this.state.selected })
+    this.setState({ flipped: !this.state.flipped })
   }
 
   clickAdd = () => {
-    // if our library already includes it
-      // make it the current selection
-      console.log(this.props)
-      this.props.selectMovieCallback(this.props);
-    // else
+    // if our library already includes it, make it the current selection
+    if(this.state.inLibrary) {
+      this.props.selectMovieCallback(this.props.external_id);
+    } else {
+      console.log("it's not in our library!")
       // add it to the library
-    // end
+    }
+  }
+
+  ribbon = () => {
+    if (!this.state.inLibrary) {
+      return (
+        <div className="ribbon">
+          <div className="txt">
+            not in library
+          </div>
+        </div>
+      )
+    } else {
+      return ""
+    }
   }
 
   render() {
+    let selected = false;
+
+    if(this.props.selectedMovieExternalId && this.props.selectedMovieExternalId === this.props.external_id) {
+      selected = true;
+    } else {
+      selected = false;
+    }
+
     return (
-      <div onClick={ this.clickMovie } className={`moviecard ${this.state.selected ? "selected" : "not-selected"}`}>
+      <div 
+        onClick={ this.clickMovie }
+        className={`moviecard
+                    ${this.state.flipped ? "flipped" : "not-flipped"}
+                    ${selected ? "selected-movie" : "not-selected-movie"}`
+                  } >
+        
         <div className="moviecard__inner">
-          <div className="moviecard__front">
-            <img className="image" src={ this.props.image_url } alt="Movie"/>
+          
+          <div className="moviecard__front box">
+            <img className={`image ${this.state.inLibrary ? "in-library" : "not-in-library"}`} src={ this.props.image_url } alt="Movie"/>
+            {this.ribbon()}
           </div>
           <div className="moviecard__back">
+            
             <p className="movie-title">{ this.props.title } { this.props.release_date ? `(${this.props.release_date.substring(0,4)})`  : "" }  </p>
-            <p className="movie-info">{ this.props.overview }</p> 
-            <button className="movie-button btn btn-secondary" onClick={this.clickAdd}>+</button>
+            <p className="movie-info">{ this.props.overview }</p>
+            { this.addButtonText } 
+            <button className="movie-button btn btn-secondary" onClick={this.clickAdd}>
+              { this.state.inLibrary ? "Select Movie" : "Add to Library" }
+            </button>
           </div>
         </div>
       </div>

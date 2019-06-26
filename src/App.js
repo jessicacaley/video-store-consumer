@@ -26,9 +26,15 @@ class App extends Component {
     });
   };
 
-  selectMovie = movie => {
+  selectMovie = movieExternalId => {
+    let selectedMovie = null;
+    this.state.movies.forEach(movie => {
+      if (movie.external_id === movieExternalId) {
+        selectedMovie = movie;
+      }
+    });
     this.setState({
-      selectedMovie: movie
+      selectedMovie: selectedMovie
     });
   };
 
@@ -64,9 +70,12 @@ class App extends Component {
     console.log(this.state.selectedMovie);
     console.log(this.state.selectedCustomer);
     const buttonClass =
-      this.state.currentCustomerName && this.state.currentMovieTitle
+      this.state.selectedCustomer.name && this.state.selectedMovie.title
         ? 'buttonDisplay'
         : 'buttonNonDisplay';
+
+    const existingMovieIds = this.state.movies.map(movie => movie.external_id);
+
     return (
       <div className="App">
         <Router>
@@ -86,17 +95,17 @@ class App extends Component {
               </li>
               <li className="text">
                 <p>Selected Movie:</p>
-                {this.state.currentMovieTitle && (
-                  <span className="current_style">
-                    {this.state.currentMovieTitle}
-                  </span>
+                {this.state.selectedMovie.title} && (
+                <span className="current_style">
+                  {this.state.selectedMovie.title}
+                </span>
                 )}
               </li>
               <li className="text">
                 <p>Selected Customer:</p>
-                {this.state.currentCustomerName && (
+                {this.state.selectedCustomer.name && (
                   <span className="current_style">
-                    {this.state.currentCustomerName}
+                    {this.state.selectedCustomer.name}
                   </span>
                 )}
               </li>
@@ -116,7 +125,7 @@ class App extends Component {
             </div>
           )}
 
-          <Route
+          {/* <Route
             path="/library"
             render={() => (
               <Library
@@ -124,8 +133,8 @@ class App extends Component {
                 selectMovieCallback={this.selectMovie}
               />
             )}
-          />
-          <Route
+          /> */}
+          {/* <Route
             path="/customers"
             render={() => (
               <Customers
@@ -133,8 +142,49 @@ class App extends Component {
                 selectCustomerCallback={this.selectCustomer}
               />
             )}
-          />
-          <Route path="/search/" render={props => <Search />} />
+          /> */}
+          {/* <Route path="/search/" render={props => <Search />} /> */}
+          <div>
+            <Route
+              path="/library/"
+              render={props => (
+                <Library
+                  movies={this.state.movies}
+                  selectMovieCallback={this.selectMovie}
+                  existingMovieIds={existingMovieIds}
+                  selectedMovieExternalId={
+                    this.state.selectedMovie
+                      ? this.state.selectedMovie.external_id
+                      : ''
+                  }
+                />
+              )}
+            />
+            <Route
+              path="/customers/"
+              render={props => (
+                <Customers
+                  customers={this.state.customers}
+                  selectCustomerCallback={this.selectCustomer}
+                  selectedCustomer={this.state.selectedCustomer}
+                />
+              )}
+            />
+            <Route
+              path="/search/"
+              render={props => (
+                <Search
+                  existingMovieIds={existingMovieIds}
+                  selectMovieCallback={this.selectMovie}
+                  selectedMovieExternalId={
+                    this.state.selectedMovie
+                      ? this.state.selectedMovie.external_id
+                      : ''
+                  }
+                />
+              )}
+            />
+          </div>
         </Router>
       </div>
     );

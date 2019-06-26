@@ -1,9 +1,9 @@
 .customer_card {
   display: flex;
-  border: 1px white solid;
+  border: 10px transparent solid;
   border-radius: 15px;
   justify-content: center;
-  width: 50%;
+  width: 400px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2rem;
@@ -12,11 +12,16 @@
   background-color: black;
 }
 
-.customer_name {
+.selected-customer {
+  /* background-color: green; */
+  border: 10px solid #FFFFE0;
+}
+
+.left-side {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-right: 1px white solid;
+  /* border-right: 1px white solid; */
   padding: 10px;
   flex: 1;
   font-size: 18px;
@@ -32,8 +37,8 @@
   flex: 1;
 }
 
-.select_customer {
-  display: flex;
+.right-side {
+  display: grid;
   justify-content: center;
   align-items: center;
   padding: 10px;
@@ -49,4 +54,8 @@
   cursor: pointer;
   outline: none;
   padding: 0.5rem 0.5rem;
+}
+
+.avatar {
+  border-radius: 100%;
 }

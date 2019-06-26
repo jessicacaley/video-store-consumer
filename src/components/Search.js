@@ -35,7 +35,6 @@ class Search extends Component {
 
     axios.get('http://localhost:3000/movies', params)
       .then(response => {
-        console.log( response.data )
         this.setState({
           results: response.data,
         })
@@ -50,8 +49,8 @@ class Search extends Component {
   // }
 
   render() {
+    console.log(this.props.selectedMovieExternalId)
     const movieComponents = this.state.results.map(movie => {
-      console.log(movie)
       return (
         <Movie 
           // SET AN ID IF SELECTED
@@ -61,16 +60,19 @@ class Search extends Component {
           overview={ movie.overview }
           release_date={ movie.release_date }
           title={ movie.title }
+          existingMovieIds={ this.props.existingMovieIds }
+          selectMovieCallback={ this.props.selectMovieCallback }
+          selectedMovieExternalId={ this.props.selectedMovieExternalId }
           // addToLibrary = {this.addToLibrary} 
         />
       )
     });
 
     return (
-    <section className="seach">
-      <form onSubmit={ this.onSubmit }>
-        <input name="searchTerm" onChange={ this.onInputChange } type="text" />
-        <input type="submit" />
+    <section className="search">
+      <form className="search-form" onSubmit={ this.onSubmit }>
+        <input name="searchTerm" value={this.state.searchTerm} type="text" onChange={ this.onInputChange } />
+        <input name="submit" type="submit" />
       </form>
       <p>props.searchTerm</p>
       <div className="library">
