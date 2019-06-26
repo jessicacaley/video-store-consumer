@@ -48,25 +48,11 @@ class App extends Component {
   };
 
   render() {
-    // const customerList = this.state.customers.map(customer => {
-    //   console.log(customer);
-    //   return (
-    //     <Customer
-    //       key={customer.id}
-    //       name={customer.name}
-    //       id={customer.id}
-    //       movies_checked_out_count={customer.movies_checked_out_count}
-    //     />
-    //   );
-    // });
-
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Bust These Blocks</h1>
         </header>
-        <input type="text" />
-        <input type="submit" />
         <Router>
           <div>
             <nav>
@@ -93,7 +79,7 @@ class App extends Component {
               render={(props) => <Customers customers={ this.state.customers } /> } />
             <Route 
               path="/search/" 
-              render={(props) => <Search searchTerm={ this.state.searchTerm } /> } />
+              render={(props) => <Search /> } />
           </div>
         </Router>
       </div>
