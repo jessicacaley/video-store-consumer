@@ -3,14 +3,10 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
-<<<<<<< HEAD
 import Library from './components/Library';
 import Search from './components/Search';
-
-=======
 import Customer from './components/Customer';
 // import Movie from './components/Movie';
->>>>>>> befc22984745e42c9ee3fc3010f3a39b186fb6dd
 
 class App extends Component {
   constructor() {
