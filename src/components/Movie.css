@@ -24,6 +24,10 @@
   margin: 10px;
 }
 
+.selected-movie {
+  border: 5px solid lightgreen;
+}
+
 .image {
   width: 200px;
   height: 300px;
@@ -40,7 +44,7 @@
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.moviecard.selected .moviecard__inner { /* .moviecard:hover  */
+.moviecard.flipped .moviecard__inner { /* .moviecard:hover  */
   transform: rotateY(180deg);
 }
 

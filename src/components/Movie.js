@@ -7,13 +7,13 @@ class Movie extends Component {
     super(props);
 
     this.state = { 
-      selected: false,
+      flipped: false,
       inLibrary: (this.props.existingMovieIds.includes(this.props.external_id)) ? true : false,
     };
   }
 
   clickMovie = () => {
-    this.setState({ selected: !this.state.selected })
+    this.setState({ flipped: !this.state.flipped })
   }
 
   clickAdd = () => {
@@ -27,8 +27,21 @@ class Movie extends Component {
   }
 
   render() {
+    let selected = false;
+
+    if(this.props.selectedMovie && this.props.selectedMovie.id === this.props.id) {
+      selected = true;
+    } else {
+      selected = false;
+    }
+
     return (
-      <div onClick={ this.clickMovie } className={`moviecard ${this.state.selected ? "selected" : "not-selected"}`}>
+      <div 
+        onClick={ this.clickMovie }
+        className={`moviecard
+                    ${this.state.flipped ? "flipped" : "not-flipped"}
+                    ${selected ? "selected-movie" : ""}
+                  `} >
         <div className="moviecard__inner">
           <div className="moviecard__front">
             <img className="image" src={ this.props.image_url } alt="Movie"/>

@@ -91,10 +91,10 @@ class App extends Component {
             </nav>
             <Route 
               path="/library/" 
-              render={(props) => <Library movies={ this.state.movies } selectMovieCallback={ this.selectMovie } existingMovieIds={ existingMovieIds } /> } />
+              render={(props) => <Library movies={ this.state.movies } selectMovieCallback={ this.selectMovie } existingMovieIds={ existingMovieIds } selectedMovie={ this.state.selectedMovie }/> } />
             <Route
               path="/customers/"
-              render={(props) => <Customers customers={ this.state.customers } selectCustomerCallback={ this.selectCustomer } /> } />
+              render={(props) => <Customers customers={ this.state.customers } selectCustomerCallback={ this.selectCustomer } selectedCustomer={ this.state.selectedCustomer }/> } />
             <Route 
               path="/search/" 
               render={(props) => <Search existingMovieIds={ existingMovieIds } selectMovieCallback={ this.selectMovie } /> } />
