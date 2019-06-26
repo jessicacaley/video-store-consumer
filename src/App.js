@@ -15,8 +15,22 @@ class App extends Component {
     this.state = {
       movies: [],
       customers: [],
+      selectedMovie: null,
+      selectedCustomer: null,
       searchTerm: null,
     };
+  }
+
+  selectCustomer = (customer) => {
+    this.setState({
+      selectedCustomer: customer,
+    })
+  }
+
+  selectMovie = (movie) => {
+    this.setState({
+      selectedMovie: movie,
+    })
   }
 
   componentDidMount = () => {
@@ -48,10 +62,16 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.selectedMovie)
+    console.log(this.state.selectedCustomer)
+
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Bust These Blocks</h1>
+          <p>movie: {this.state.selectedMovie ? this.state.selectedMovie.title : ""}</p>
+          <p>customer: {this.state.selectedCustomer ? this.state.selectedCustomer.name : "" }</p>
+
         </header>
         <Router>
           <div>
@@ -73,10 +93,10 @@ class App extends Component {
             </nav>
             <Route 
               path="/library/" 
-              render={(props) => <Library movies={ this.state.movies } /> } />
+              render={(props) => <Library movies={ this.state.movies } selectMovieCallback={ this.selectMovie } /> } />
             <Route
               path="/customers/"
-              render={(props) => <Customers customers={ this.state.customers } /> } />
+              render={(props) => <Customers customers={ this.state.customers } selectCustomerCallback={ this.selectCustomer } /> } />
             <Route 
               path="/search/" 
               render={(props) => <Search /> } />

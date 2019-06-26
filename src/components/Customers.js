@@ -4,7 +4,7 @@ import Customer from './Customer'
 import './Customers.css'
 
 const Customers = (props) => {
-  const { customers } = props;
+  const { customers, selectCustomerCallback} = props;
 
   const customerList = customers.map(customer => {
     console.log(customer);
@@ -13,7 +13,8 @@ const Customers = (props) => {
         key={customer.id}
         name={customer.name}
         id={customer.id}
-        movies_checked_out_count={customer.movies_checked_out_count} />
+        movies_checked_out_count={customer.movies_checked_out_count}
+        selectCustomerCallback={selectCustomerCallback} />
     );
   });
 
