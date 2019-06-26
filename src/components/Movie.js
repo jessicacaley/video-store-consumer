@@ -15,6 +15,16 @@ class Movie extends Component {
     this.setState({ selected: !this.state.selected })
   }
 
+  clickAdd = () => {
+    // if our library already includes it
+      // make it the current selection
+      console.log(this.props)
+      this.props.selectMovieCallback(this.props);
+    // else
+      // add it to the library
+    // end
+  }
+
   render() {
     return (
       <div onClick={ this.clickMovie } className={`moviecard ${this.state.selected ? "selected" : "not-selected"}`}>
@@ -23,9 +33,9 @@ class Movie extends Component {
             <img className="image" src={ this.props.image_url } alt="Movie"/>
           </div>
           <div className="moviecard__back">
-            <p className="movie-title">{ this.props.title } ({ this.props.release_date.substring(0,4) })</p>
+            <p className="movie-title">{ this.props.title } { this.props.release_date ? `(${this.props.release_date.substring(0,4)})`  : "" }  </p>
             <p className="movie-info">{ this.props.overview }</p> 
-            <button className="movie-button btn btn-secondary">+</button>
+            <button className="movie-button btn btn-secondary" onClick={this.clickAdd}>+</button>
           </div>
         </div>
       </div>

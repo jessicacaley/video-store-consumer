@@ -28,10 +28,6 @@
   margin: 10px;
 }
 
-.moviecard.selected {
-  /* border: 5px solid lightgreen; */
-}
-
 .image {
   width: 200px;
   height: 300px;
