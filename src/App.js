@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Library from './components/Library';
 import Search from './components/Search';
 import Customers from './components/Customers';
+import './App.css';
 // import Movie from './components/Movie';
 
 class App extends Component {
@@ -17,21 +16,21 @@ class App extends Component {
       customers: [],
       selectedMovie: null,
       selectedCustomer: null,
-      searchTerm: null,
+      searchTerm: null
     };
   }
 
-  selectCustomer = (customer) => {
+  selectCustomer = customer => {
     this.setState({
-      selectedCustomer: customer,
-    })
-  }
+      selectedCustomer: customer
+    });
+  };
 
-  selectMovie = (movie) => {
+  selectMovie = movie => {
     this.setState({
-      selectedMovie: movie,
-    })
-  }
+      selectedMovie: movie
+    });
+  };
 
   componentDidMount = () => {
     axios
@@ -62,45 +61,80 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.selectedMovie)
-    console.log(this.state.selectedCustomer)
-
+    console.log(this.state.selectedMovie);
+    console.log(this.state.selectedCustomer);
+    const buttonClass =
+      this.state.currentCustomerName && this.state.currentMovieTitle
+        ? 'buttonDisplay'
+        : 'buttonNonDisplay';
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Bust These Blocks</h1>
-          <p>movie: {this.state.selectedMovie ? this.state.selectedMovie.title : ""}</p>
-          <p>customer: {this.state.selectedCustomer ? this.state.selectedCustomer.name : "" }</p>
-
-        </header>
         <Router>
-          <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/library/">Library</Link>
-                </li>
-                <li>
-                  <Link to="/customers/">Customers</Link>
-                </li>
-                <li>
-                  <Link to="/search/">Search</Link>
-                </li>
-              </ul>
-            </nav>
-            <Route 
-              path="/library/" 
-              render={(props) => <Library movies={ this.state.movies } selectMovieCallback={ this.selectMovie } /> } />
-            <Route
-              path="/customers/"
-              render={(props) => <Customers customers={ this.state.customers } selectCustomerCallback={ this.selectCustomer } /> } />
-            <Route 
-              path="/search/" 
-              render={(props) => <Search /> } />
-          </div>
+          <nav className="flex-nav">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/search">Search</Link>
+              </li>
+              <li>
+                <Link to="/library">Library</Link>
+              </li>
+              <li>
+                <Link to="/customers">Customers</Link>
+              </li>
+              <li className="text">
+                <p>Selected Movie:</p>
+                {this.state.currentMovieTitle && (
+                  <span className="current_style">
+                    {this.state.currentMovieTitle}
+                  </span>
+                )}
+              </li>
+              <li className="text">
+                <p>Selected Customer:</p>
+                {this.state.currentCustomerName && (
+                  <span className="current_style">
+                    {this.state.currentCustomerName}
+                  </span>
+                )}
+              </li>
+              <li className="text">
+                <button onClick={this.rentMovie} className={buttonClass}>
+                  Check Out
+                </button>
+              </li>
+            </ul>
+          </nav>
+          {this.state.msg && (
+            <div className="errors_container">
+              <h3>{this.state.msg}</h3>
+              <button className="closeError" onClick={this.closeMessage}>
+                <strong>&#10007;</strong>
+              </button>
+            </div>
+          )}
+
+          <Route
+            path="/library"
+            render={() => (
+              <Library
+                movies={this.state.movies}
+                selectMovieCallback={this.selectMovie}
+              />
+            )}
+          />
+          <Route
+            path="/customers"
+            render={() => (
+              <Customers
+                customers={this.state.customers}
+                selectCustomerCallback={this.selectCustomer}
+              />
+            )}
+          />
+          <Route path="/search/" render={props => <Search />} />
         </Router>
       </div>
     );
