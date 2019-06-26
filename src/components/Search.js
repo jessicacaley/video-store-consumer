@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import './Search.css';
+import Movie from './Movie'
 
 class Search extends Component {
   constructor(props) {
@@ -8,6 +10,7 @@ class Search extends Component {
 
     this.state = { 
       searchTerm: "",
+      results: [],
     };
   }
 
@@ -24,22 +27,45 @@ class Search extends Component {
   onSubmit = (event) => {
     event.preventDefault();
 
-    const query = this.state.searchTerm;
+    const params = {
+      params: {
+        query: this.state.searchTerm,
+      }
+    }
 
-    // axios.get('http://localhost:3000/customers', params)
-    //   .then(response => {
-    //     const customers = response.data.flatMap(customer => {
-    //       return [{ ...customer }];
-    //     });
-
-    //     this.setState({ customers: customers });
-    //   })
-    //   .catch(error => {
-    //     this.setState({ errorMessage: error.message });
-    //   });
+    axios.get('http://localhost:3000/movies', params)
+      .then(response => {
+        console.log( response.data )
+        this.setState({
+          results: response.data,
+        })
+      })
+      .catch(error => {
+        this.setState({ errorMessage: error.message });
+      });
   }
 
+  // addToLibrary = () => {
+    
+  // }
+
   render() {
+    const movieComponents = this.state.results.map(movie => {
+      console.log(movie)
+      return (
+        <Movie 
+          // SET AN ID IF SELECTED
+          key={ movie.external_id }
+          external_id={ movie.external_id }
+          image_url={ movie.image_url }
+          overview={ movie.overview }
+          release_date={ movie.release_date }
+          title={ movie.title }
+          // addToLibrary = {this.addToLibrary} 
+        />
+      )
+    });
+
     return (
     <section className="seach">
       <form onSubmit={ this.onSubmit }>
@@ -47,6 +73,9 @@ class Search extends Component {
         <input type="submit" />
       </form>
       <p>props.searchTerm</p>
+      <div className="library">
+        { movieComponents }
+      </div>
     </section>
     );
   }
