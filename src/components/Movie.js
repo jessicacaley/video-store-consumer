@@ -43,14 +43,14 @@ class Movie extends Component {
   render() {
     let selected = false;
 
-    if(this.props.selectedMovieExternalId && this.props.selectedMovieExternalId === this.props.external_id) {
+    if(this.props.selectedMovieId && this.props.selectedMovieExternalId === this.props.external_id) {
       selected = true;
     } else {
       selected = false;
     }
 
     return (
-      <div 
+      <div
         onClick={ this.clickMovie }
         className={`moviecard
                     ${this.state.flipped ? "flipped" : "not-flipped"}

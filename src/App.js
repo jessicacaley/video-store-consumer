@@ -70,7 +70,7 @@ class App extends Component {
     console.log(this.state.selectedMovie);
     console.log(this.state.selectedCustomer);
     const buttonClass =
-      this.state.selectedCustomer.name && this.state.selectedMovie.title
+      this.state.selectedCustomer && this.state.selectedMovie
         ? 'buttonDisplay'
         : 'buttonNonDisplay';
 
@@ -95,7 +95,7 @@ class App extends Component {
               </li>
               <li className="text">
                 <p>Selected Movie:</p>
-                {this.state.selectedMovie.title} && (
+                {this.state.selectedMovie && (
                 <span className="current_style">
                   {this.state.selectedMovie.title}
                 </span>
@@ -103,7 +103,7 @@ class App extends Component {
               </li>
               <li className="text">
                 <p>Selected Customer:</p>
-                {this.state.selectedCustomer.name && (
+                {this.state.selectedCustomer && (
                   <span className="current_style">
                     {this.state.selectedCustomer.name}
                   </span>

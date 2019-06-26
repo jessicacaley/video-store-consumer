@@ -1,11 +1,11 @@
 .customer_card {
   display: flex;
   border: 10px transparent solid;
-  border-radius: 15px;
+  border-radius: 10px;
   justify-content: center;
   width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   margin-bottom: 2rem;
   padding: 2rem 0;
   color: white;
