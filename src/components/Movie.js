@@ -38,7 +38,7 @@ class Movie extends Component {
             <p className="movie-info">{ this.props.overview }</p>
             { this.addButtonText } 
             <button className="movie-button btn btn-secondary" onClick={this.clickAdd}>
-              {this.state.inLibrary ? "Select Movie" : "Add to Library"}
+              { this.state.inLibrary ? "Select Movie" : "Add to Library" }
             </button>
           </div>
         </div>

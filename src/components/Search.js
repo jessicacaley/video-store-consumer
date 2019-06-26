@@ -70,7 +70,7 @@ class Search extends Component {
     <section className="seach">
       <form onSubmit={ this.onSubmit }>
         <input name="searchTerm" onChange={ this.onInputChange } type="text" />
-        <input type="submit" />
+        <input name="submit" type="submit" />
       </form>
       <p>props.searchTerm</p>
       <div className="library">
