@@ -5,7 +5,7 @@ import logo from './logo.svg';
 import './App.css';
 import Library from './components/Library';
 import Search from './components/Search';
-import Customer from './components/Customer';
+import Customers from './components/Customers';
 // import Movie from './components/Movie';
 
 class App extends Component {
@@ -48,22 +48,21 @@ class App extends Component {
   };
 
   render() {
-    const customerList = this.state.customers.map(customer => {
-      console.log(customer);
-      return (
-        <Customer
-          key={customer.id}
-          name={customer.name}
-          id={customer.id}
-          movies_checked_out_count={customer.movies_checked_out_count}
-        />
-      );
-    });
+    // const customerList = this.state.customers.map(customer => {
+    //   console.log(customer);
+    //   return (
+    //     <Customer
+    //       key={customer.id}
+    //       name={customer.name}
+    //       id={customer.id}
+    //       movies_checked_out_count={customer.movies_checked_out_count}
+    //     />
+    //   );
+    // });
 
     return (
       <div className="App">
         <header className="App-header">
-<<<<<<< HEAD
           <h1 className="App-title">Bust These Blocks</h1>
         </header>
         <input type="text" />
@@ -89,20 +88,14 @@ class App extends Component {
             <Route 
               path="/library/" 
               render={(props) => <Library movies={ this.state.movies } /> } />
+            <Route
+              path="/customers/"
+              render={(props) => <Customers customers={ this.state.customers } /> } />
             <Route 
               path="/search/" 
               render={(props) => <Search searchTerm={ this.state.searchTerm } /> } />
           </div>
         </Router>
-=======
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title" />
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div>{customerList}</div>
->>>>>>> befc22984745e42c9ee3fc3010f3a39b186fb6dd
       </div>
     );
   }
