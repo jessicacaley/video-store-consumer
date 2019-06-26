@@ -1,6 +1,6 @@
 .customer_card {
   display: flex;
-  border: 5px white solid;
+  border: 10px transparent solid;
   border-radius: 15px;
   justify-content: center;
   width: 400px;
@@ -14,7 +14,7 @@
 
 .selected-customer {
   /* background-color: green; */
-  border: 5px solid lightgreen;
+  border: 10px solid #FFFFE0;
 }
 
 .left-side {

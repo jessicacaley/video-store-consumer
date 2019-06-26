@@ -26,6 +26,20 @@ class Movie extends Component {
     }
   }
 
+  ribbon = () => {
+    if (!this.state.inLibrary) {
+      return (
+        <div className="ribbon">
+          <div className="txt">
+            not in library
+          </div>
+        </div>
+      )
+    } else {
+      return ""
+    }
+  }
+
   render() {
     let selected = false;
 
@@ -40,13 +54,17 @@ class Movie extends Component {
         onClick={ this.clickMovie }
         className={`moviecard
                     ${this.state.flipped ? "flipped" : "not-flipped"}
-                    ${selected ? "selected-movie" : ""}
-                  `} >
+                    ${selected ? "selected-movie" : "not-selected-movie"}`
+                  } >
+        
         <div className="moviecard__inner">
-          <div className="moviecard__front">
-            <img className="image" src={ this.props.image_url } alt="Movie"/>
+          
+          <div className="moviecard__front box">
+            <img className={`image ${this.state.inLibrary ? "in-library" : "not-in-library"}`} src={ this.props.image_url } alt="Movie"/>
+            {this.ribbon()}
           </div>
           <div className="moviecard__back">
+            
             <p className="movie-title">{ this.props.title } { this.props.release_date ? `(${this.props.release_date.substring(0,4)})`  : "" }  </p>
             <p className="movie-info">{ this.props.overview }</p>
             { this.addButtonText } 

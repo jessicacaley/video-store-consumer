@@ -13,25 +13,30 @@
   margin-bottom: 20px;
 }
 
+
+
+.image {
+  position: relative;
+  width: 180px;
+  height: 280px;
+  border: 1px solid #222;
+}
+
+
+.not-in-library {
+  opacity: .4;
+}
+
 /*** this code is a modified version of https://www.w3schools.com/howto/howto_css_flip_card.asp ***/
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .moviecard {
   background-color: transparent;
   width: 200px;
   height: 300px;
-  border: 5px solid #222;
+  border: 10px solid #222;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
-  margin: 10px;
-}
-
-.selected-movie {
-  border: 5px solid lightgreen;
-  background-color: lightgreen;
-}
-
-.image {
-  width: 190px;
-  height: 290px;
+  margin: 5px;
+  border-radius: 5px;
 }
 
 /* This container is needed to position the front and back side */
@@ -61,16 +66,49 @@
 
 /* Style the front side (fallback if image is missing) */
 .moviecard__front {
-  background-color: #bbb;
+  background-color: #222;
   color: black;
 }
 
 /* Style the back side */
 .moviecard__back {
-  background-color: black;
+  background-color: #000a;
   color: white;
   transform: rotateY(180deg);
   /* padding: 10px; */
   overflow: scroll;
 }
 /*** end code from https://www.w3schools.com/howto/howto_css_flip_card.asp ***/
+
+/* ribbon code based on https://stackoverflow.com/questions/13071715/angled-wrapping-css-ribbon-over-image */
+.ribbon {
+  -webkit-transform: rotate(45deg); 
+     -moz-transform: rotate(45deg); 
+      -ms-transform: rotate(45deg); 
+       -o-transform: rotate(45deg); 
+          transform: rotate(45deg); 
+    border: 25px solid transparent;
+    border-bottom: 25px solid #777;
+    position: absolute;
+    top: 0px;
+    right: -35px;
+    padding: 0 10px;
+    width: 120px;
+    color: #EEEa;
+    font-family: sans-serif;
+    size: 11px;
+}
+
+.ribbon .txt {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    font-weight: bold;
+}
+/* end ribbon code */
+
+.selected-movie {
+  border: 10px solid #FFFFE0;
+  background-color: #FFFFE0;
+}
