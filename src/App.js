@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
-import Movie from './components/Movie';
+import Library from './components/Library';
+import Search from './components/Search';
+
 
 class App extends Component {
   constructor() {
@@ -11,6 +14,7 @@ class App extends Component {
     this.state = { 
       movies: [],
       customers: [],
+      searchTerm: null,
     };
   }
 
@@ -28,31 +32,39 @@ class App extends Component {
   }
   
   render() {
-    const libraryMovieComponents = this.state.movies.map(movie => {
-      return (
-        <Movie 
-          key={ movie.id } 
-          id={ movie.id }
-          external_id={ movie.external_id }
-          title={ movie.title }
-          overview={ movie.overview }
-          release_date={ movie.release_date }
-          image_url={movie.image_url} />
-      )
-    });
-
     return (
       <div className="App">
         <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <h1 className="App-title">Bust These Blocks</h1>
         </header>
-        <section className="moviecard__container">
-          { libraryMovieComponents }
-        </section>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <input type="text" />
+        <input type="submit" />
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/library/">Library</Link>
+                </li>
+                <li>
+                  <Link to="/customers/">Customers</Link>
+                </li>
+                <li>
+                  <Link to="/search/">Search</Link>
+                </li>
+              </ul>
+            </nav>
+            <Route 
+              path="/library/" 
+              render={(props) => <Library movies={ this.state.movies } /> } />
+            <Route 
+              path="/search/" 
+              render={(props) => <Search searchTerm={ this.state.searchTerm } /> } />
+          </div>
+        </Router>
       </div>
     );
   }
