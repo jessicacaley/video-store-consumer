@@ -49,6 +49,7 @@ class Search extends Component {
   // }
 
   render() {
+    console.log(this.props.selectedMovieExternalId)
     const movieComponents = this.state.results.map(movie => {
       return (
         <Movie 
@@ -61,15 +62,16 @@ class Search extends Component {
           title={ movie.title }
           existingMovieIds={ this.props.existingMovieIds }
           selectMovieCallback={ this.props.selectMovieCallback }
+          selectedMovieExternalId={ this.props.selectedMovieExternalId }
           // addToLibrary = {this.addToLibrary} 
         />
       )
     });
 
     return (
-    <section className="seach">
-      <form onSubmit={ this.onSubmit }>
-        <input name="searchTerm" onChange={ this.onInputChange } type="text" />
+    <section className="search">
+      <form className="search-form" onSubmit={ this.onSubmit }>
+        <input name="searchTerm" value={this.state.searchTerm} type="text" onChange={ this.onInputChange } />
         <input name="submit" type="submit" />
       </form>
       <p>props.searchTerm</p>

@@ -19,7 +19,7 @@ class Movie extends Component {
   clickAdd = () => {
     // if our library already includes it, make it the current selection
     if(this.state.inLibrary) {
-      this.props.selectMovieCallback(this.props);
+      this.props.selectMovieCallback(this.props.external_id);
     } else {
       console.log("it's not in our library!")
       // add it to the library
@@ -43,7 +43,7 @@ class Movie extends Component {
   render() {
     let selected = false;
 
-    if(this.props.selectedMovie && this.props.selectedMovie.id === this.props.id) {
+    if(this.props.selectedMovieExternalId && this.props.selectedMovieExternalId === this.props.external_id) {
       selected = true;
     } else {
       selected = false;

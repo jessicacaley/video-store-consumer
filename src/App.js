@@ -26,9 +26,15 @@ class App extends Component {
     })
   }
 
-  selectMovie = (movie) => {
+  selectMovie = (movieExternalId) => {
+    let selectedMovie = null
+    this.state.movies.forEach(movie => {
+      if (movie.external_id === movieExternalId) {
+        selectedMovie = movie;
+      }
+    })
     this.setState({
-      selectedMovie: movie,
+      selectedMovie: selectedMovie,
     })
   }
 
@@ -91,13 +97,13 @@ class App extends Component {
             </nav>
             <Route 
               path="/library/" 
-              render={(props) => <Library movies={ this.state.movies } selectMovieCallback={ this.selectMovie } existingMovieIds={ existingMovieIds } selectedMovie={ this.state.selectedMovie }/> } />
+              render={(props) => <Library movies={ this.state.movies } selectMovieCallback={ this.selectMovie } existingMovieIds={ existingMovieIds } selectedMovieExternalId={ this.state.selectedMovie? this.state.selectedMovie.external_id : "" }/> } />
             <Route
               path="/customers/"
               render={(props) => <Customers customers={ this.state.customers } selectCustomerCallback={ this.selectCustomer } selectedCustomer={ this.state.selectedCustomer }/> } />
             <Route 
               path="/search/" 
-              render={(props) => <Search existingMovieIds={ existingMovieIds } selectMovieCallback={ this.selectMovie } /> } />
+              render={(props) => <Search existingMovieIds={ existingMovieIds } selectMovieCallback={ this.selectMovie } selectedMovieExternalId={ this.state.selectedMovie? this.state.selectedMovie.external_id : ""} /> } />
           </div>
         </Router>
       </div>

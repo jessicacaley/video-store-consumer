@@ -4,7 +4,7 @@ import Movie from './Movie'
 import './Library.css'
 
 const Library = (props) => {
-  const { movies, selectMovieCallback, existingMovieIds, selectedMovie } = props;
+  const { movies, selectMovieCallback, existingMovieIds, selectedMovieExternalId } = props;
 
   const movieComponents = movies.map(movie => {
     return (
@@ -18,7 +18,7 @@ const Library = (props) => {
         image_url={movie.image_url}
         selectMovieCallback={ selectMovieCallback }
         existingMovieIds={ existingMovieIds }
-        selectedMovie={ selectedMovie } />
+        selectedMovieExternalId={ selectedMovieExternalId } />
     )
   });
 
