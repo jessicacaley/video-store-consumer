@@ -35,7 +35,6 @@ class Search extends Component {
 
     axios.get('http://localhost:3000/movies', params)
       .then(response => {
-        console.log( response.data )
         this.setState({
           results: response.data,
         })
@@ -51,7 +50,6 @@ class Search extends Component {
 
   render() {
     const movieComponents = this.state.results.map(movie => {
-      console.log(movie)
       return (
         <Movie 
           // SET AN ID IF SELECTED
@@ -61,6 +59,8 @@ class Search extends Component {
           overview={ movie.overview }
           release_date={ movie.release_date }
           title={ movie.title }
+          existingMovieIds={ this.props.existingMovieIds }
+          selectMovieCallback={ this.props.selectMovieCallback }
           // addToLibrary = {this.addToLibrary} 
         />
       )

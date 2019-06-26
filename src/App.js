@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import logo from './logo.svg';
 import './App.css';
 import Library from './components/Library';
 import Search from './components/Search';
@@ -62,8 +61,7 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.selectedMovie)
-    console.log(this.state.selectedCustomer)
+    const existingMovieIds = this.state.movies.map(movie => movie.external_id );
 
     return (
       <div className="App">
@@ -93,13 +91,13 @@ class App extends Component {
             </nav>
             <Route 
               path="/library/" 
-              render={(props) => <Library movies={ this.state.movies } selectMovieCallback={ this.selectMovie } /> } />
+              render={(props) => <Library movies={ this.state.movies } selectMovieCallback={ this.selectMovie } existingMovieIds={ existingMovieIds } /> } />
             <Route
               path="/customers/"
               render={(props) => <Customers customers={ this.state.customers } selectCustomerCallback={ this.selectCustomer } /> } />
             <Route 
               path="/search/" 
-              render={(props) => <Search /> } />
+              render={(props) => <Search existingMovieIds={ existingMovieIds } selectMovieCallback={ this.selectMovie } /> } />
           </div>
         </Router>
       </div>

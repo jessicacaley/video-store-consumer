@@ -8,6 +8,7 @@ class Movie extends Component {
 
     this.state = { 
       selected: false,
+      inLibrary: (this.props.existingMovieIds.includes(this.props.external_id)) ? true : false,
     };
   }
 
@@ -16,13 +17,13 @@ class Movie extends Component {
   }
 
   clickAdd = () => {
-    // if our library already includes it
-      // make it the current selection
-      console.log(this.props)
+    // if our library already includes it, make it the current selection
+    if(this.state.inLibrary) {
       this.props.selectMovieCallback(this.props);
-    // else
+    } else {
+      console.log("it's not in our library!")
       // add it to the library
-    // end
+    }
   }
 
   render() {
@@ -34,8 +35,11 @@ class Movie extends Component {
           </div>
           <div className="moviecard__back">
             <p className="movie-title">{ this.props.title } { this.props.release_date ? `(${this.props.release_date.substring(0,4)})`  : "" }  </p>
-            <p className="movie-info">{ this.props.overview }</p> 
-            <button className="movie-button btn btn-secondary" onClick={this.clickAdd}>+</button>
+            <p className="movie-info">{ this.props.overview }</p>
+            { this.addButtonText } 
+            <button className="movie-button btn btn-secondary" onClick={this.clickAdd}>
+              {this.state.inLibrary ? "Select Movie" : "Add to Library"}
+            </button>
           </div>
         </div>
       </div>

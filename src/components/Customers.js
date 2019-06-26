@@ -7,7 +7,6 @@ const Customers = (props) => {
   const { customers, selectCustomerCallback} = props;
 
   const customerList = customers.map(customer => {
-    console.log(customer);
     return (
       <Customer
         key={customer.id}
