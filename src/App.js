@@ -54,10 +54,10 @@ class App extends Component {
           const splitTitleB = titleB.split(" ")
 
           // ignore "a" and "the" at the beginning of titles when alphabetizing
-          if(splitTitleA[0] === "A" || splitTitleA[0] === "THE") {
+          if(splitTitleA[0] === "A" || splitTitleA[0] === "THE" || splitTitleA[0] === "AN") {
             titleA = splitTitleA.slice(1,splitTitleA.length).join(" ")
           }
-          if(splitTitleB[0] === "A" || splitTitleB[0] === "THE") {
+          if(splitTitleB[0] === "A" || splitTitleB[0] === "THE" || splitTitleB[0] === "AN") {
             titleB = splitTitleB.slice(1,splitTitleB.length).join(" ")
           }
         
