@@ -46,6 +46,21 @@ class App extends Component {
           return [{ ...movie }];
         });
 
+        function compareMovieTitles(a, b) {
+          const titleA = a.title.toUpperCase();
+          const titleB = b.title.toUpperCase();
+        
+          let comparison = 0;
+          if (titleA > titleB) {
+            comparison = 1;
+          } else if (titleA < titleB) {
+            comparison = -1;
+          }
+          return comparison;
+        }
+
+        movies.sort(compareMovieTitles);
+
         this.setState({ movies: movies });
       })
       .catch(error => {
@@ -62,6 +77,21 @@ class App extends Component {
         const customers = response.data.flatMap(customer => {
           return [{ ...customer }];
         });
+
+        function compareLastNames(a, b) {
+          const nameA = a.name.split(" ")[1].toUpperCase();
+          const nameB = b.name.split(" ")[1].toUpperCase();
+        
+          let comparison = 0;
+          if (nameA > nameB) {
+            comparison = 1;
+          } else if (nameA < nameB) {
+            comparison = -1;
+          }
+          return comparison;
+        }
+        
+        customers.sort(compareLastNames);
 
         this.setState({ customers: customers });
       })
