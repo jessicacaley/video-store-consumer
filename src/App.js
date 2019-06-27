@@ -47,8 +47,19 @@ class App extends Component {
         });
 
         function compareMovieTitles(a, b) {
-          const titleA = a.title.toUpperCase();
-          const titleB = b.title.toUpperCase();
+          let titleA = a.title.toUpperCase();
+          let titleB = b.title.toUpperCase();
+
+          const splitTitleA = titleA.split(" ")
+          const splitTitleB = titleB.split(" ")
+
+          // ignore "a" and "the" at the beginning of titles when alphabetizing
+          if(splitTitleA[0] === "A" || splitTitleA[0] === "THE") {
+            titleA = splitTitleA.slice(1,splitTitleA.length).join(" ")
+          }
+          if(splitTitleB[0] === "A" || splitTitleB[0] === "THE") {
+            titleB = splitTitleB.slice(1,splitTitleB.length).join(" ")
+          }
         
           let comparison = 0;
           if (titleA > titleB) {
