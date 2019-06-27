@@ -38,7 +38,7 @@ class App extends Component {
     });
   };
 
-  componentDidMount = () => {
+  getMovies = () => {
     axios
       .get('http://localhost:3000/')
       .then(response => {
@@ -51,6 +51,10 @@ class App extends Component {
       .catch(error => {
         this.setState({ errorMessage: error.message });
       });
+  }
+
+  componentDidMount = () => {
+    this.getMovies();
 
     axios
       .get('http://localhost:3000/customers')
@@ -65,6 +69,10 @@ class App extends Component {
         this.setState({ errorMessage: error.message });
       });
   };
+
+  resetMovies = () => {
+    this.getMovies();
+  }
 
   render() {
     console.log(this.state.selectedMovie);
@@ -181,6 +189,9 @@ class App extends Component {
                       ? this.state.selectedMovie.external_id
                       : ''
                   }
+                  resetMovies={this.resetMovies}
+
+                  // addToLibrary={addToLibrary}
                 />
               )}
             />

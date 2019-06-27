@@ -63,6 +63,8 @@ class Search extends Component {
           existingMovieIds={ this.props.existingMovieIds }
           selectMovieCallback={ this.props.selectMovieCallback }
           selectedMovieExternalId={ this.props.selectedMovieExternalId }
+          resetMovies ={this.props.resetMovies}
+
           // addToLibrary = {this.addToLibrary} 
         />
       )
