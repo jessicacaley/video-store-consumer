@@ -20,6 +20,24 @@ class App extends Component {
     };
   }
 
+  rentMovie = (event) => {
+    // event.preventD
+    const params = {
+      customer_id: this.state.selectedCustomer.id,
+      due_date: "Fri, 30 Jun 2019"
+    }
+    axios.post(`http://localhost:3000/rentals/${this.state.selectedMovie.title}/check-out`, params)
+      .then(response => {
+        this.setState({
+          selectedMovie: null,
+          selectedCustomer: null,
+        });
+      })
+      .catch(error => {
+        this.setState({ errorMessage: error.message });
+      });
+  }
+
   selectCustomer = customer => {
     this.setState({
       selectedCustomer: customer

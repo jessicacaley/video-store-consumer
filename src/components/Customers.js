@@ -12,7 +12,7 @@ const Customers = (props) => {
         key={customer.id}
         name={customer.name}
         id={customer.id}
-        movies_checked_out_count={customer.movies_checked_out_count}
+        // movies_checked_out_count={customer.movies_checked_out_count}
         selectCustomerCallback={selectCustomerCallback}
         selectedCustomer={selectedCustomer} />
     );
