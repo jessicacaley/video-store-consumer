@@ -17,14 +17,14 @@ const Customer = props => {
   }
 
   return (
-    <section className={`customer_card ${selected ? "selected-customer" : ""}`}>
+    <section onClick={ clickSelect } className={`customer_card ${selected ? "selected-customer" : ""}`}>
       <div className="left-side">
         <Avatar className="avatar" name={ props.name }/>
       </div>
       <div className="right-side">
-        <h5>{props.name}</h5>
-        <p>{`${ props.movies_checked_out_count } movies checked out.`}</p>
-        <button className="select_button btn btn-secondary" onClick={ clickSelect }>Select Customer</button>
+        <h5 className="customer-name">{props.name}</h5>
+        <p className="customer-details">{`${ props.movies_checked_out_count } movies checked out`}</p>
+        {/* <button className="select_button btn btn-secondary" onClick={ clickSelect }>Select Customer</button> */}
       </div>
     </section>
   );
