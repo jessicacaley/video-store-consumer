@@ -202,26 +202,6 @@ class App extends Component {
               </button>
             </div>
           )}
-
-          {/* <Route
-            path="/library"
-            render={() => (
-              <Library
-                movies={this.state.movies}
-                selectMovieCallback={this.selectMovie}
-              />
-            )}
-          /> */}
-          {/* <Route
-            path="/customers"
-            render={() => (
-              <Customers
-                customers={this.state.customers}
-                selectCustomerCallback={this.selectCustomer}
-              />
-            )}
-          /> */}
-          {/* <Route path="/search/" render={props => <Search />} /> */}
           <div>
             <Route
               path="/library/"
