@@ -44,7 +44,6 @@ class Movie extends Component {
     axios
       .post('http://localhost:3000/movies/', params)
       .then(response => {
-        console.log("success!")
         this.props.resetMovies();
       })
       .catch(error => {

@@ -23,7 +23,7 @@ const Customer = props => {
       </div>
       <div className="right-side">
         <h5>{props.name}</h5>
-        {/* <p>{`${ props.movies_checked_out_count } movies checked out.`}</p> */}
+        <p>{`${ props.movies_checked_out_count } movies checked out.`}</p>
         <button className="select_button btn btn-secondary" onClick={ clickSelect }>Select Customer</button>
       </div>
     </section>

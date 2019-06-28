@@ -28,6 +28,7 @@ class App extends Component {
     }
     axios.post(`http://localhost:3000/rentals/${this.state.selectedMovie.title}/check-out`, params)
       .then(response => {
+        window.confirm(`${this.state.selectedCustomer.name} successfully checked out ${this.state.selectedMovie.title}`);
         this.setState({
           selectedMovie: null,
           selectedCustomer: null,
@@ -36,7 +37,15 @@ class App extends Component {
       .catch(error => {
         this.setState({ errorMessage: error.message });
       });
+    
   }
+
+  componentDidUpdate(previousProps,previousState) {
+    if (this.state.customers !== previousState.customers) {
+      this.getCustomers();
+    }
+  }
+
 
   selectCustomer = customer => {
     this.setState({
@@ -97,36 +106,40 @@ class App extends Component {
       });
   }
 
+  getCustomers = () => {
+    axios
+    .get('http://localhost:3000/customers')
+    .then(response => {
+      const customers = response.data.flatMap(customer => {
+        return [{ ...customer }];
+      });
+
+      function compareLastNames(a, b) {
+        const nameA = a.name.split(" ")[1].toUpperCase();
+        const nameB = b.name.split(" ")[1].toUpperCase();
+      
+        let comparison = 0;
+        if (nameA > nameB) {
+          comparison = 1;
+        } else if (nameA < nameB) {
+          comparison = -1;
+        }
+        return comparison;
+      }
+      
+      customers.sort(compareLastNames);
+
+      this.setState({ customers: customers });
+    })
+    .catch(error => {
+      this.setState({ errorMessage: error.message });
+    });
+  }
+
   componentDidMount = () => {
     this.getMovies();
 
-    axios
-      .get('http://localhost:3000/customers')
-      .then(response => {
-        const customers = response.data.flatMap(customer => {
-          return [{ ...customer }];
-        });
-
-        function compareLastNames(a, b) {
-          const nameA = a.name.split(" ")[1].toUpperCase();
-          const nameB = b.name.split(" ")[1].toUpperCase();
-        
-          let comparison = 0;
-          if (nameA > nameB) {
-            comparison = 1;
-          } else if (nameA < nameB) {
-            comparison = -1;
-          }
-          return comparison;
-        }
-        
-        customers.sort(compareLastNames);
-
-        this.setState({ customers: customers });
-      })
-      .catch(error => {
-        this.setState({ errorMessage: error.message });
-      });
+    this.getCustomers();
   };
 
   resetMovies = () => {
@@ -134,8 +147,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.selectedMovie);
-    console.log(this.state.selectedCustomer);
     const buttonClass =
       this.state.selectedCustomer && this.state.selectedMovie
         ? 'buttonDisplay'
