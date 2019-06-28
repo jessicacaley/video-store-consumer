@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import './Movie.css';
 
@@ -21,9 +22,34 @@ class Movie extends Component {
     if(this.state.inLibrary) {
       this.props.selectMovieCallback(this.props.external_id);
     } else {
-      console.log("it's not in our library!")
-      // add it to the library
+      this.addToLibrary()
     }
+  }
+
+  componentDidUpdate(previousProps) {
+    if (this.props.existingMovieIds !== previousProps.existingMovieIds) {
+      this.setState({ inLibrary: (this.props.existingMovieIds.includes(this.props.external_id)) ? true : false })
+    }
+  }
+
+  addToLibrary = () => {
+    const params = {
+      id: this.props.id,
+      external_id: this.props.external_id,
+      title: this.props.title,
+      overview: this.props.overview,
+      release_date: this.props.release_date,
+      image_url: this.props.image_url
+    }
+    axios
+      .post('http://localhost:3000/movies/', params)
+      .then(response => {
+        console.log("success!")
+        this.props.resetMovies();
+      })
+      .catch(error => {
+        this.setState({ errorMessage: error.message });
+      })
   }
 
   ribbon = () => {
@@ -43,7 +69,7 @@ class Movie extends Component {
   render() {
     let selected = false;
 
-    if(this.props.selectedMovieId && this.props.selectedMovieExternalId === this.props.external_id) {
+    if(this.props.selectedMovieExternalId && this.props.selectedMovieExternalId === this.props.external_id) {
       selected = true;
     } else {
       selected = false;
@@ -53,8 +79,8 @@ class Movie extends Component {
       <div
         onClick={ this.clickMovie }
         className={`moviecard
-                    ${this.state.flipped ? "flipped" : "not-flipped"}
-                    ${selected ? "selected-movie" : "not-selected-movie"}`
+                    ${this.state.flipped ? "flipped" : ""}
+                    ${selected ? "selected-movie" : ""}`
                   } >
         
         <div className="moviecard__inner">

@@ -38,7 +38,7 @@ class App extends Component {
     });
   };
 
-  componentDidMount = () => {
+  getMovies = () => {
     axios
       .get('http://localhost:3000/')
       .then(response => {
@@ -46,11 +46,41 @@ class App extends Component {
           return [{ ...movie }];
         });
 
+        function compareMovieTitles(a, b) {
+          let titleA = a.title.toUpperCase();
+          let titleB = b.title.toUpperCase();
+
+          const splitTitleA = titleA.split(" ")
+          const splitTitleB = titleB.split(" ")
+
+          // ignore "a" and "the" at the beginning of titles when alphabetizing
+          if(splitTitleA[0] === "A" || splitTitleA[0] === "THE" || splitTitleA[0] === "AN") {
+            titleA = splitTitleA.slice(1,splitTitleA.length).join(" ")
+          }
+          if(splitTitleB[0] === "A" || splitTitleB[0] === "THE" || splitTitleB[0] === "AN") {
+            titleB = splitTitleB.slice(1,splitTitleB.length).join(" ")
+          }
+        
+          let comparison = 0;
+          if (titleA > titleB) {
+            comparison = 1;
+          } else if (titleA < titleB) {
+            comparison = -1;
+          }
+          return comparison;
+        }
+
+        movies.sort(compareMovieTitles);
+
         this.setState({ movies: movies });
       })
       .catch(error => {
         this.setState({ errorMessage: error.message });
       });
+  }
+
+  componentDidMount = () => {
+    this.getMovies();
 
     axios
       .get('http://localhost:3000/customers')
@@ -59,6 +89,21 @@ class App extends Component {
           return [{ ...customer }];
         });
 
+        function compareLastNames(a, b) {
+          const nameA = a.name.split(" ")[1].toUpperCase();
+          const nameB = b.name.split(" ")[1].toUpperCase();
+        
+          let comparison = 0;
+          if (nameA > nameB) {
+            comparison = 1;
+          } else if (nameA < nameB) {
+            comparison = -1;
+          }
+          return comparison;
+        }
+        
+        customers.sort(compareLastNames);
+
         this.setState({ customers: customers });
       })
       .catch(error => {
@@ -66,6 +111,7 @@ class App extends Component {
       });
   };
 
+<<<<<<< HEAD
   rentMovie = () => {
     if (this.state.movieId && this.state.customerId) {
       let dueDate = new Date();
@@ -105,6 +151,11 @@ class App extends Component {
         });
     }
   };
+=======
+  resetMovies = () => {
+    this.getMovies();
+  }
+>>>>>>> c36194589029ca29bc9e06afc42810af32984dfa
 
   render() {
     console.log(this.state.selectedMovie);
@@ -219,6 +270,9 @@ class App extends Component {
                       ? this.state.selectedMovie.external_id
                       : ''
                   }
+                  resetMovies={this.resetMovies}
+
+                  // addToLibrary={addToLibrary}
                 />
               )}
             />
