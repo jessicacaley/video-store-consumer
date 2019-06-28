@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  background-color: #222;
+  background-color: black;
+  min-height: 100vh;
 }
 
 html {
@@ -46,7 +47,11 @@ a:hover {
   color: white;
   font-weight: 100;
   letter-spacing: 2px;
-  background-color: black;
+}
+
+.flex-nav {
+  background-color: #353C95;
+  margin-bottom: 20px;
 }
 
 .flex-nav li {
@@ -91,17 +96,22 @@ a:hover {
   }
 }
 
-.buttonDisplay {
+/* .buttonDisplay {
   font-size: 16px;
   color: white;
-  background-color: #7e7f9a;
+  background-color: #6c757d;
+  border: transparent;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   outline: none;
   padding: 0.5rem 0.5rem;
   letter-spacing: 1px;
-}
+} */
+
+/* .buttonDisplay:hover {
+  border: solid;
+} */
 
 .buttonNonDisplay {
   display: none;
@@ -133,4 +143,22 @@ a:hover {
 
 .current_style {
   font-weight: bold;
+  color: #F7EA44;
+}
+
+.homepage {
+  font-size: 90px;
+}
+
+.logo-image {
+  position: fixed;
+  min-width: 500px;
+  max-width: 60%;
+  margin: 5% auto;
+  left: 0;
+  right: 0;
+}
+
+a:hover {
+  color: #F7EA44;
 }

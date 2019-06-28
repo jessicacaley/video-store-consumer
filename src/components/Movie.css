@@ -29,10 +29,11 @@
   background-color: transparent;
   width: 200px;
   height: 300px;
-  border: 10px solid #222;
+  border: 10px solid transparent;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   margin: 5px;
   border-radius: 5px;
+  cursor: help;
 }
 
 /* This container is needed to position the front and back side */
@@ -105,6 +106,8 @@
 /* end ribbon code */
 
 .selected-movie {
-  border: 10px solid #FFFFE0;
-  background-color: #FFFFE0;
+  border: 10px solid #353C95;
+  background-color: #353C95;
 }
+
+/* yellow: F7EA44 */

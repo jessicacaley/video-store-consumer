@@ -41,6 +41,7 @@ class App extends Component {
   }
 
   componentDidUpdate(previousProps,previousState) {
+    // this works but is mad buggy... it's actaully just constantly & endlessly rerendering
     if (this.state.customers !== previousState.customers) {
       this.getCustomers();
     }
@@ -149,7 +150,7 @@ class App extends Component {
   render() {
     const buttonClass =
       this.state.selectedCustomer && this.state.selectedMovie
-        ? 'buttonDisplay'
+        ? 'btn btn-secondary buttonDisplay'
         : 'buttonNonDisplay';
 
     const existingMovieIds = this.state.movies.map(movie => movie.external_id);
@@ -203,6 +204,7 @@ class App extends Component {
             </div>
           )}
           <div>
+
             <Route
               path="/library/"
               render={props => (
@@ -216,6 +218,14 @@ class App extends Component {
                       : ''
                   }
                 />
+              )}
+            />
+            <Route
+              path="/"
+              exact render={() => (
+                <div className="homepage">
+                  <img className="logo-image" src="https://vignette.wikia.nocookie.net/logopedia/images/d/dc/Blockbuster_Video.svg/revision/latest/scale-to-width-down/1000?cb=20180306154744" />
+                </div> 
               )}
             />
             <Route

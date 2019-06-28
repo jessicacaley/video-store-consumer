@@ -71,12 +71,13 @@ class Search extends Component {
     });
 
     return (
-    <section className="search">
-      <form className="search-form" onSubmit={ this.onSubmit }>
-        <input name="searchTerm" value={this.state.searchTerm} type="text" onChange={ this.onInputChange } />
-        <input name="submit" type="submit" />
-      </form>
-      <p>props.searchTerm</p>
+    <section className="search ">
+      <div class="form-row justify-content-center">
+        <form className="form-inline search-form" onSubmit={ this.onSubmit }>
+          <input className="form-control" name="searchTerm" value={this.state.searchTerm} type="text" onChange={ this.onInputChange } />
+          <input className="btn btn-secondary submit-button" name="submit" type="submit" />
+        </form>
+      </div>
       <div className="library">
         { movieComponents }
       </div>
