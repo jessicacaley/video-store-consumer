@@ -151,12 +151,9 @@ a:hover {
 }
 
 .logo-image {
-  position: fixed;
   min-width: 500px;
   max-width: 60%;
   margin: 5% auto;
-  left: 0;
-  right: 0;
 }
 
 a:hover {
