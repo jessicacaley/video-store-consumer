@@ -50,17 +50,25 @@ class App extends Component {
           let titleA = a.title.toUpperCase();
           let titleB = b.title.toUpperCase();
 
-          const splitTitleA = titleA.split(" ")
-          const splitTitleB = titleB.split(" ")
+          const splitTitleA = titleA.split(' ');
+          const splitTitleB = titleB.split(' ');
 
           // ignore "a" and "the" at the beginning of titles when alphabetizing
-          if(splitTitleA[0] === "A" || splitTitleA[0] === "THE" || splitTitleA[0] === "AN") {
-            titleA = splitTitleA.slice(1,splitTitleA.length).join(" ")
+          if (
+            splitTitleA[0] === 'A' ||
+            splitTitleA[0] === 'THE' ||
+            splitTitleA[0] === 'AN'
+          ) {
+            titleA = splitTitleA.slice(1, splitTitleA.length).join(' ');
           }
-          if(splitTitleB[0] === "A" || splitTitleB[0] === "THE" || splitTitleB[0] === "AN") {
-            titleB = splitTitleB.slice(1,splitTitleB.length).join(" ")
+          if (
+            splitTitleB[0] === 'A' ||
+            splitTitleB[0] === 'THE' ||
+            splitTitleB[0] === 'AN'
+          ) {
+            titleB = splitTitleB.slice(1, splitTitleB.length).join(' ');
           }
-        
+
           let comparison = 0;
           if (titleA > titleB) {
             comparison = 1;
@@ -77,7 +85,7 @@ class App extends Component {
       .catch(error => {
         this.setState({ errorMessage: error.message });
       });
-  }
+  };
 
   componentDidMount = () => {
     this.getMovies();
@@ -90,9 +98,9 @@ class App extends Component {
         });
 
         function compareLastNames(a, b) {
-          const nameA = a.name.split(" ")[1].toUpperCase();
-          const nameB = b.name.split(" ")[1].toUpperCase();
-        
+          const nameA = a.name.split(' ')[1].toUpperCase();
+          const nameB = b.name.split(' ')[1].toUpperCase();
+
           let comparison = 0;
           if (nameA > nameB) {
             comparison = 1;
@@ -101,7 +109,7 @@ class App extends Component {
           }
           return comparison;
         }
-        
+
         customers.sort(compareLastNames);
 
         this.setState({ customers: customers });
@@ -111,7 +119,6 @@ class App extends Component {
       });
   };
 
-<<<<<<< HEAD
   rentMovie = () => {
     if (this.state.movieId && this.state.customerId) {
       let dueDate = new Date();
@@ -151,11 +158,10 @@ class App extends Component {
         });
     }
   };
-=======
+
   resetMovies = () => {
     this.getMovies();
-  }
->>>>>>> c36194589029ca29bc9e06afc42810af32984dfa
+  };
 
   render() {
     console.log(this.state.selectedMovie);
