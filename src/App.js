@@ -66,6 +66,46 @@ class App extends Component {
       });
   };
 
+  rentMovie = () => {
+    if (this.state.movieId && this.state.customerId) {
+      let dueDate = new Date();
+      dueDate.setDate(dueDate.getDate() + 7);
+      const { selectedMovie, customerId, movieId } = this.state;
+      const url = `'http://localhost:3000/rentals'${selectedMovie}/check-out`;
+
+      const rental = {
+        movie_id: movieId,
+        customer_id: customerId,
+        due_date: dueDate
+      };
+
+      axios
+        .post(url, rental)
+        .then(() => {
+          const customers = [...this.state.customers];
+          let customer = customers.find(
+            person => person.id === this.state.customerId
+          );
+          const customerIndex = customers.findIndex(
+            person => person.id === this.state.customerId
+          );
+          customer.movies_checked_out_count += 1;
+          customers[customerIndex] = customer;
+          this.setState({
+            movieId: null,
+            customerId: null,
+            selectedMovie: '',
+            selectedCustomer: '',
+            customers
+          });
+          this.setMessages('Successfully added rental');
+        })
+        .catch(error => {
+          this.setMessages(error.message);
+        });
+    }
+  };
+
   render() {
     console.log(this.state.selectedMovie);
     console.log(this.state.selectedCustomer);
@@ -79,42 +119,40 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <nav className="flex-nav">
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/search">Search</Link>
-              </li>
-              <li>
-                <Link to="/library">Library</Link>
-              </li>
-              <li>
-                <Link to="/customers">Customers</Link>
-              </li>
-              <li className="text">
-                <p>Selected Movie:</p>
-                {this.state.selectedMovie && (
+          <nav className="navbar navbar-dark bg-dark sticky-top">
+            <div className="nav-item nav-link">
+              <Link to="/">Home</Link>
+            </div>
+            <div className="nav-item nav-link">
+              <Link to="/search">Search</Link>
+            </div>
+            <div className="nav-item nav-link">
+              <Link to="/library">Library</Link>
+            </div>
+            <div className="nav-item nav-link">
+              <Link to="/customers">Customers</Link>
+            </div>
+            <div>
+              <p>Selected Movie:</p>
+              {this.state.selectedMovie && (
                 <span className="current_style">
                   {this.state.selectedMovie.title}
                 </span>
-                )}
-              </li>
-              <li className="text">
-                <p>Selected Customer:</p>
-                {this.state.selectedCustomer && (
-                  <span className="current_style">
-                    {this.state.selectedCustomer.name}
-                  </span>
-                )}
-              </li>
-              <li className="text">
-                <button onClick={this.rentMovie} className={buttonClass}>
-                  Check Out
-                </button>
-              </li>
-            </ul>
+              )}
+            </div>
+            <div>
+              <p>Selected Customer:</p>
+              {this.state.selectedCustomer && (
+                <span className="current_style">
+                  {this.state.selectedCustomer.name}
+                </span>
+              )}
+            </div>
+            <div className="nav-item nav-link">
+              <button onClick={this.rentMovie} className={buttonClass}>
+                Check Out
+              </button>
+            </div>
           </nav>
           {this.state.msg && (
             <div className="errors_container">
