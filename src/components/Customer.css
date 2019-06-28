@@ -7,9 +7,10 @@
   /* margin-left: auto;
   margin-right: auto; */
   margin-bottom: 2rem;
-  padding: 2rem 0;
+  padding: 1rem 0;
   color: white;
   background-color: black;
+  margin: 20px;
 }
 
 .selected-customer {
